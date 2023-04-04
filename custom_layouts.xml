@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="web.internal_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <div class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <style type="text/css">
+                @font-face {
+                font-family: KacstLetter;
+                    src: url(/base_custom/static/font/KacstLetter.ttf);
+                    }
+
+                p, div, span, 
+                table, thead, tbody, tr, th, td, 
+                h1, h2, h3, h4, h5, h6, 
+                b {font-family: KacstLetter;}
+
+                .CUS_table_header {
+                    width:100%;
+                    height:60px;
+                    }
+
+                .CUS_table_header tr,
+                .CUS_table_header th,
+                .CUS_table_header td {
+                    border : 0px solid #fff;
+                    }
+            </style>
+            <!-- <center>
+                <table class="CUS_table_header">
+                    <tr>
+                        <td width="25%">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 60px;" alt="Logo"/>
+                        </td>
+                        <td width="50%">
+                            <t t-if="o and o.env.context.get('lang') == 'ar_001' ">
+                                <center style="font-size: 24px;">
+                                    <div t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['name'], 'no_marker': true}"/>
+                                </center>
+                            </t>
+                            <t t-else="">
+                                <center style="font-size: 18px;">
+                                    <div t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['name'], 'no_marker': true}"/>
+                                </center>
+                            </t>
+                        </td>
+                        <td width="25%">
+                            
+                        </td>
+                    </tr>
+                </table>
+            </center> -->
+        </div>
+        
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <link rel="stylesheet" href="/base_custom/static/src/css/report_style.css"/>
+            <t t-if="o and o.env.context.get('lang') == 'ar_001' ">
+                <link rel="stylesheet" href="/base_custom/static/src/css/report_style_ar.css"/>
+            </t>
+            <t t-raw="0"/>
+        </div>
+        
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <style type="text/css">
+                @font-face {
+                font-family: KacstLetter;
+                    src: url(/base_custom/static/font/KacstLetter.ttf);
+                    }
+                p, div, span, 
+                table, thead, tbody, tr, th, td, 
+                h1, h2, h3, h4, h5, h6, 
+                b {font-family: KacstLetter;}
+                
+                .CUS_table_footer {
+                    width:100%;
+                    height:30px;
+                    border-top: 1px solid #118aa6;
+                    text-align:center;
+                    }
+
+                .CUS_table_footer tr,
+                .CUS_table_footer th,
+                .CUS_table_footer td {
+                    border : 0px solid #fff;
+                    }
+            </style>
+            <center>
+                <table class="CUS_table_footer">
+                    <t t-if="o and o.env.context.get('lang') == 'ar_001' ">
+                        <tr>
+                            <td width="25%" >
+                                <span style="font-size: 12px;" t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                            </td>
+                            <td width="50%">
+                                <span class="page" />
+                            </td>
+                            <td width="25%">
+                                <span t-esc="user.name"/>
+                            </td>
+                        </tr>
+                    </t>
+                    <t t-else="">
+                        <tr style="font-size: 14px;">
+                            <td width="25%" >
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                            </td>
+                            <td width="50%">
+                                <span class="page" />
+                            </td>
+                            <td width="25%">
+                                <span t-esc="user.name"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </center>
+        </div>
+    </template>
+
+    <template id="web.external_layout_standard">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <div class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <style type="text/css">
+                @font-face {
+                font-family: KacstLetter;
+                    src: url(/base_custom/static/font/KacstLetter.ttf);
+                    }
+
+                p, div, span, 
+                table, thead, tbody, tr, th, td, 
+                h1, h2, h3, h4, h5, h6, 
+                b {font-family: KacstLetter;}
+
+                .CUS_table_header {
+                    width:100%;
+                    height:60px;
+                    }
+
+                .CUS_table_header tr,
+                .CUS_table_header th,
+                .CUS_table_header td {
+                    border : 0px solid #fff;
+                    }
+            </style>
+            <!-- <center>
+                <table class="CUS_table_header">
+                    <tr>
+                        <td width="25%">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 60px;" alt="Logo"/>
+                        </td>
+                        <td width="50%">
+                            <t t-if="o and o.env.context.get('lang') == 'ar_001' ">
+                                <center style="font-size: 24px;">
+                                    <div t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['name'], 'no_marker': true}"/>
+                                </center>
+                            </t>
+                            <t t-else="">
+                                <center style="font-size: 18px;">
+                                    <div t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['name'], 'no_marker': true}"/>
+                                </center>
+                            </t>
+                        </td>
+                        <td width="25%">
+                            
+                        </td>
+                    </tr>
+                </table>
+            </center> -->
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+            </div>
+            <link rel="stylesheet" href="/base_custom/static/src/css/report_style.css"/>
+            <t t-if="o and o.env.context.get('lang') == 'ar_001' ">
+                <link rel="stylesheet" href="/base_custom/static/src/css/report_style_ar.css"/>
+            </t>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <style type="text/css">
+                @font-face {
+                font-family: KacstLetter;
+                    src: url(/base_custom/static/font/KacstLetter.ttf);
+                    }
+                p, div, span, 
+                table, thead, tbody, tr, th, td, 
+                h1, h2, h3, h4, h5, h6, 
+                b {font-family: KacstLetter;}
+                
+                .CUS_table_footer {
+                    width:100%;
+                    height:30px;
+                    border-top: 1px solid #118aa6;
+                    text-align:center;
+                    }
+
+                .CUS_table_footer tr,
+                .CUS_table_footer th,
+                .CUS_table_footer td {
+                    border : 0px solid #fff;
+                    }
+            </style>
+            <center>
+                <table class="CUS_table_footer">
+                    <t t-if="o and o.env.context.get('lang') == 'ar_001' ">
+                        <tr>
+                            <td width="25%" >
+                            </td>
+                            <td width="50%">
+                                <span class="page" />
+                            </td>
+                            <td width="25%">
+                            </td>
+                        </tr>
+                    </t>
+                    <t t-else="">
+                        <tr >
+                            <td width="25%" >
+                            </td>
+                            <td width="50%">
+                                <span class="page"/>
+                            </td>
+                            <td width="25%">
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </center>
+        </div>
+    </template>
+
+    <template id="web.basic_layout">
+        <t t-call="web.html_container">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <link rel="stylesheet" href="/base_custom/static/src/css/report_style.css"/>
+                <t t-if="o and o.env.context.get('lang') == 'ar_001' ">
+                    <link rel="stylesheet" href="/base_custom/static/src/css/report_style_ar.css"/>
+                </t>
+                <t t-out="0"/>
+            </div>
+        </t>
+    </template>
+
+    
+</odoo>
