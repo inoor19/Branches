@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <report id="employee_report_action"
+                string="Employee Report"
+                model="employee.report.wiz"
+                report_type="qweb-pdf"
+                file="hr_reports.hr_report_template"
+                name="hr_reports.hr_report_template_view"
+                
+        />
+            
+
+
+        <template id="hr_report_template_view">
+            <t t-call="web.html_container">
+                 <t t-call="web.basic_layout"> 
+
+                <t t-call="web.internal_layout">
+
+                    <div class="page">
+                        <center>
+                            <p class="SH_title">تقرير الموظفين</p>
+                            <t t-esc='by'/>                        
+                        </center>
+              
+                        <t t-if="data['type'] == 'synthesis'" >
+                        <center>
+                            <p class="SH_title">Synthesis</p>
+                            <t t-esc='by'/>                        
+                        </center>
+                        </t>
+
+                        <t t-else="data['type'] == 'detailed'" >
+                        <center>
+                            <p class="SH_title">Detailed</p>
+                            <t t-esc='by'/>                        
+                        </center>
+                        </t>
+
+                        
+
+                        <t t-if="data['type'] == 'synthesis'" >
+
+                                    <table class="SH_table">
+                                        <thead>
+                                            <tr>
+                                                <center style="width: 50%">
+
+                                                    <th  class="text-center" style="width: 25%">
+                                                        اﻹسم 
+                                                    </th >
+                                                    <th rowspan="4" class="text-center" style="width: 25%">
+                                                        <center>
+                                                        عدد الموظفين 
+                                                        </center>
+                                                    </th>
+                                                </center>
+                                            </tr>
+                                        </thead>
+                                    
+                                        <tbody>
+                                            <t t-foreach="emp_dic" t-as="line">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="line['type']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line['count']"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+
+                                        </tbody>
+                                </table>
+
+
+
+                        </t>                               
+                               
+                               
+                               
+                        <t t-elif="data['type'] == 'detailed' and data['group'] == 'all' " >
+                            <table class="SH_table">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:right">الرقم الوظيفي</th>
+                                        <th style="text-align:right">إسم الموظف</th>
+                                        <th style="text-align:right">تاريخ الميلاد</th>
+                                        <th style="text-align:right">تاريخ التعيين</th>
+                                        <th style="text-align:right">المؤهل</th>
+                                        <th style="text-align:right">القسم</th>
+                                        <th style="text-align:right">الدرجة الحالية</th>
+                                        <th style="text-align:right">الشركة</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                        <t t-foreach="emp_dic" t-as="o">
+                                                <tr>
+                                                    
+                                                    <td>
+                                                        <t t-esc="o['number']"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="o['name']"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="o['birthday']"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="o['start']"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="o['certificate_level']"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="o['department']"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="o['degree']"/>
+                                                    </td>
+
+                                                    <td>
+                                                        <t t-esc="o['company']"/>
+                                                    </td>
+
+                                                </tr>
+
+                                            
+                                                                            
+                                    
+                                        </t>
+                                
+                                </tbody>
+
+                            </table>
+        
+        
+                        </t>
+                        <t t-elif="data['type'] == 'detailed'">
+                           <t t-if="data['group'] == 'department' or data['group'] == 'job' or data['group'] == 'degree' or data['group'] == 'company'">
+                                <t t-foreach="emp_dic" t-as="group">
+                                <t t-esc="group['type']"/>
+                                <table class="SH_table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:right">الرقم الوظيفي</th>
+                                            <th style="text-align:right">إسم الموظف</th>
+                                            <th style="text-align:right">تاريخ الميلاد</th>
+                                            <th style="text-align:right">تاريخ التعيين</th>
+                                            <th style="text-align:right">المؤهل</th>
+                                            <th style="text-align:right">القسم</th>
+                                            <th style="text-align:right">الوظيفة</th>
+                                            <th style="text-align:right">الدرجة الحالية</th>
+                                            <th style="text-align:right">الشركة</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                            <t t-foreach="group['employees']" t-as="o">
+                                                    
+                                                        <tr>
+                                                            
+                                                            <td>
+                                                                <t t-esc="o['number']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="o['name']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="o['birthday']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="o['start']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="o['certificate_level']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="o['department']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="o['job']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="o['degree']"/>
+                                                            </td>
+
+                                                            <td>
+                                                                <t t-esc="o['company']"/>
+                                                            </td>
+
+                                                        </tr>
+                                                            
+                                        
+                                        </t>
+                                    
+                                    </tbody>
+
+                                </table>
+                                </t>
+                             </t>
+                        </t>
+    
+                        </div>
+                        </t>
+            </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

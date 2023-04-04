@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="employee_report_wiz_view" model="ir.ui.view">
+            <field name="name">Employee Repoprt</field>
+            <field name="model">employee.report.wiz</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="company_ids" groups="base.group_multi_company"/>
+                        <field name="collect_by" />
+                        <field name="employee_state"/>
+                        <field name="report_type" />
+                    </group>
+
+
+                    <notebook colspan="4"  >
+                        <page string="Departments">
+                            <group>
+                                <field name="department_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                         <page string="Job"  >
+                            <group  col="4">
+                                <field name="job_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                         <page string="Degree"  >
+                            <group  col="4">
+                                <field name="degree_id" nolabel="1"/>                          
+                            </group>
+                        </page>
+                         <page string="Company"  >
+                            <group  col="4">
+                                <field name="company_id" nolabel="1"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+
+
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="employee__report_wiz_action" model="ir.actions.act_window">
+            <field name="name">Employee Report</field>
+            <field name="res_model">employee.report.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="type">ir.actions.act_window</field>
+        </record>
+
+
+    <!-- <menuitem
+            id="hr_loan_delay_menu"
+            action="hr_loan_delay_action"
+            parent="menu_hr_loan_root"
+            sequence="3"
+            groups="hr_loan.group_loan_delay_request"/> -->
+
+        <menuitem id="hr_employee_wiz"
+                  name="Employees Report"
+                  parent="hr.hr_menu_hr_reports"
+                  action="employee__report_wiz_action"
+                  sequence="3"
+                  />
+                  
+                  
+
+
+    </data>
+</odoo>

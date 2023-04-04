@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<record id="hr_paprFormat" model="report.paperformat">
+        <field name="name">Hr Format</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">20</field>
+        <field name="header_spacing">100</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">200</field>
+    </record>
+
+
+
+<report id="employee_loan_report_action"
+            string="Employee Loan"
+            model="employee.loans.report.wiz"
+            report_type="qweb-pdf"
+            file="hr_loan.employee_loans"
+            name="hr_loan.employee_loans"
+            
+    />
+
+<report id="certificate_employee_loan_report_action"
+            string="Certificate Loan"
+            model="hr.loan"
+            report_type="qweb-pdf"
+            file="hr_loan.certificate_employee_loans"
+            name="hr_loan.certificate_employee_loans"
+            
+    />
+
+</odoo>
